@@ -23,11 +23,16 @@ class ExportSelected extends FormRequest
      */
     public function rules()
     {
-        $rules = [];
+        if (!is_array($this->request->get('studentId'))) {
+            return [
+                'studentId' => 'required|array'
+            ];
+        }
 
+        $rules = [];
         if (count($this->request->get('studentId')) > 0) {
-            foreach($this->request->get('studentId') as $key => $val) {
-                $rules['studentId.'.$key] = 'integer';
+            foreach ($this->request->get('studentId') as $key => $val) {
+                $rules['studentId.' . $key] = 'integer|exists:student,id';
             }
         }
 

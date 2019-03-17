@@ -37,7 +37,7 @@ class ExportController extends Controller
     }
 
     /**
-     * Exports selected students data to a CSV file
+     * @param ExportSelected $request
      */
     public function export(ExportSelected $request)
     {
