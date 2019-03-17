@@ -11,6 +11,7 @@ _ide_helper.php
 
 # laravel
 /storage
+.env
 
 # npm
 node_modules/*
