@@ -7,7 +7,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Bueltge\Marksimple\Marksimple;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\ExportSelected;
+use App\Http\Requests\ExportSelectedStudentsRequest;
 
 class ExportController extends Controller
 {
@@ -37,9 +37,9 @@ class ExportController extends Controller
     }
 
     /**
-     * @param ExportSelected $request
+     * @param ExportSelectedStudentsRequest $request
      */
-    public function export(ExportSelected $request)
+    public function export(ExportSelectedStudentsRequest $request)
     {
         //
     }
