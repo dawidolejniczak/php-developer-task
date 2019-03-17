@@ -10,7 +10,7 @@ _ide_helper.php
 /vendor
 
 # laravel
-/storage/logs
+/storage
 
 # npm
 node_modules/*
