@@ -21,7 +21,7 @@ class ExportSelected extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         if (!is_array($this->request->get('studentId'))) {
             return [
