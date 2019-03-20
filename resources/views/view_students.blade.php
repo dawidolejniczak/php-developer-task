@@ -8,7 +8,7 @@
 
     <body>
 
-        <form action="/export" method="post" id="student_form">
+        <form action="{{ route('exports.store') }}" method="post" id="student_form">
             {{ csrf_field() }}
 
             <div class="header">

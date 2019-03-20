@@ -41,7 +41,7 @@
 
     {!! $content !!}
 
-    <p><a href="{{url('view')}}" title="task">Click here to take on the challenge</a></p>
+    <p><a href="{{ route('students.index') }}" title="task">Click here to take on the challenge</a></p>
 </div>
 </body>
 

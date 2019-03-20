@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repositories;
 
 
-use App\Export;
+use App\Models\Export;
 use App\Extensions\AbstractRepository;
 use Illuminate\Database\Eloquent\Builder;
 

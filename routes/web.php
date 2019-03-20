@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('', [ 'uses' => 'ExportController@welcome', 'as' => 'home'] );
-Route::get('view', [ 'uses' => 'ExportController@viewStudents', 'as' => 'view'] );
-Route::post('export', [ 'uses' => 'ExportController@export', 'as' => 'export'] );
+Route::get('', ['uses' => 'PagesController@welcome', 'as' => 'home']);
 
-// Optional extra
-Route::get('view-vue', [ 'uses' => 'ExportController@viewStudentsWithVue', 'as' => 'view-vue'] );
+Route::resource('students', 'StudentsController', ['only' => [
+    'index',
+]]);
+
+Route::resource('exports', 'ExportsController', ['only' => [
+    'index', 'store'
+]]);
