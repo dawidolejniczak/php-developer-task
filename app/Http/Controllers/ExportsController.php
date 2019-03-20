@@ -8,6 +8,7 @@ use App\Http\Requests\ExportSelectedStudents;
 use App\Repositories\StudentsRepository;
 use App\Repositories\ExportsRepository;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 final class ExportsController extends Controller
 {
@@ -32,9 +33,17 @@ final class ExportsController extends Controller
         $this->studentsRepository = $studentsRepository;
     }
 
+
+    public function index()
+    {
+        $exports = $this->exportsRepository->getAll();
+
+        return view('exports.index', compact('exports'));
+    }
+
     /**
      * @param ExportSelectedStudents $request
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function store(ExportSelectedStudents $request)
     {
@@ -65,6 +74,18 @@ final class ExportsController extends Controller
             Log::error($exception->getMessage());
             return redirect()->back()->withErrors($exception->getMessage());
         }
+
+    }
+
+    /**
+     * @param int $id
+     * @return BinaryFileResponse
+     */
+    public function show(int $id): BinaryFileResponse
+    {
+        $export = $this->exportsRepository->find($id)->getOne();
+
+        return response()->download(storage_path('app/' . $export->uniqid . '.csv'));
 
     }
 }

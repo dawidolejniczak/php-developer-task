@@ -18,5 +18,5 @@ Route::resource('students', 'StudentsController', ['only' => [
 ]]);
 
 Route::resource('exports', 'ExportsController', ['only' => [
-    'index', 'store'
+    'index', 'store', 'show'
 ]]);

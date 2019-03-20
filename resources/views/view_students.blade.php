@@ -21,6 +21,7 @@
                 <div style='margin: 10px; text-align: left'>
                     <input type="button" value="Select All" id="select_all" />
                     <input type="submit" value="Export" id="submit" />
+                    <a href="{{ route('exports.index') }}">All Exports</a>
                 </div>
             </div>
 
