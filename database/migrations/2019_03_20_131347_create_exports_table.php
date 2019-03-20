@@ -13,7 +13,7 @@ class CreateExportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('exports', function (Blueprint $table) {
             $table->increments('id');
             $table->string('uniqid');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateExportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table');
+        Schema::dropIfExists('exports');
     }
 }

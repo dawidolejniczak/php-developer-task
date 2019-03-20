@@ -47,15 +47,20 @@ final class ExportsController extends Controller
 
 
             $file = new GenerateStudentCSV($students);
-            $isSuccessful = $file->generate();
+            $uniqid = uniqid();
+
+            $isSuccessful = $file->generate($uniqid);
 
             if (!$isSuccessful) {
                 throw new CVSNotCreatedException();
             }
 
-            return response()->download(storage_path('app/export.csv'));
+            $this->exportsRepository->create([
+                'uniqid' => $uniqid
+            ]);
+
+            return response()->download(storage_path('app/' . $uniqid . '.csv'));
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
 
             Log::error($exception->getMessage());
             return redirect()->back()->withErrors($exception->getMessage());

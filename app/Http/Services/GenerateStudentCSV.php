@@ -32,9 +32,10 @@ class GenerateStudentCSV implements GenerateCSV
     }
 
     /**
+     * @param string|null $fileName
      * @return bool
      */
-    public function generate(): bool
+    public function generate(string $fileName = null): bool
     {
         try {
             $contents =
@@ -69,7 +70,11 @@ class GenerateStudentCSV implements GenerateCSV
                 $contents .= PHP_EOL;
             }
 
-            Storage::disk('local')->put('export.csv', $contents);
+            if (!$fileName) {
+                $fileName = 'export';
+            }
+
+            Storage::disk('local')->put($fileName . '.csv', $contents);
 
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
