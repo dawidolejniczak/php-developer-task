@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CVSNotCreatedException;
 use App\Http\Services\GenerateStudentCSV;
 use App\Http\Requests\ExportSelectedStudents;
 use App\Repositories\StudentsRepository;
 use App\Repositories\ExportsRepository;
+use Illuminate\Support\Facades\Log;
 
 final class ExportsController extends Controller
 {
@@ -32,17 +34,32 @@ final class ExportsController extends Controller
 
     /**
      * @param ExportSelectedStudents $request
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function store(ExportSelectedStudents $request)
     {
-        $students = $this->studentsRepository
-            ->with('address')
-            ->whereIn('id', $request->get('studentId'))
-            ->getAll();
+
+        try {
+            $students = $this->studentsRepository
+                ->with('address')
+                ->whereIn('id', $request->get('studentId'))
+                ->getAll();
 
 
-        $file = new GenerateStudentCSV($students);
-        $isSuccessful = $file->generate();
+            $file = new GenerateStudentCSV($students);
+            $isSuccessful = $file->generate();
+
+            if (!$isSuccessful) {
+                throw new CVSNotCreatedException();
+            }
+
+            return response()->download(storage_path('app/export.csv'));
+        } catch (\Exception $exception) {
+            dd($exception->getMessage());
+
+            Log::error($exception->getMessage());
+            return redirect()->back()->withErrors($exception->getMessage());
+        }
 
     }
 }
