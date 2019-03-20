@@ -53,6 +53,18 @@ abstract class AbstractRepository
     }
 
     /**
+     * @param string $column
+     * @param array $values
+     * @return $this
+     */
+    public function whereIn(string $column, array $values): self
+    {
+        $this->query->whereIn($column, $values);
+
+        return $this;
+    }
+
+    /**
      * @param int $id
      * @return AbstractRepository
      */

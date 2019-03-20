@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Services\GenerateStudentCSV;
 use App\Http\Requests\ExportSelectedStudents;
 use App\Repositories\StudentsRepository;
-use App\Repository\ExportsRepository;
+use App\Repositories\ExportsRepository;
 
-final class ExportController extends Controller
+final class ExportsController extends Controller
 {
     /**
      * @var ExportsRepository
