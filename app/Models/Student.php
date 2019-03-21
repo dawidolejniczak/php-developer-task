@@ -15,8 +15,6 @@ class Student extends Model
      */
     protected $table = 'student';
 
-    public $timestamps = false;
-
     protected $hidden = ['address_id', 'created_at', 'updated_at'];
 
     public function course()
